@@ -157,11 +157,12 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
+                widget.ThermalSensor(fontsize=23, format='{tag}: {temp:.0f}{unit}'),
                 widget.Spacer(),
                 widget.TextBox(text='Current layout: ', fontsize=23),
                 widget.CurrentLayout(fontsize=23),
                 widget.Spacer(length=100),
-                widget.Prompt(),
+                widget.Prompt(fontsize=23),
                 widget.WindowName(fontsize=23),
                 widget.GroupBox(center_aligned=True, fontsize=23),
                 widget.Spacer(),
