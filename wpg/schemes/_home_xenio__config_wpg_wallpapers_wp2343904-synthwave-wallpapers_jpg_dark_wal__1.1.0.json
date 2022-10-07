@@ -1,0 +1,28 @@
+{
+    "wallpaper": "/home/xenio/.config/wpg/wallpapers/wp2343904-synthwave-wallpapers.jpg",
+    "alpha": "100",
+
+    "special": {
+        "background": "#0d0e0e",
+        "foreground": "#85e9e9",
+        "cursor": "#85e9e9"
+    },
+    "colors": {
+        "color0": "#0d0e0e",
+        "color1": "#952E2A",
+        "color2": "#B4295F",
+        "color3": "#581F9D",
+        "color4": "#A0219C",
+        "color5": "#E425A3",
+        "color6": "#CC27D5",
+        "color7": "#85e9e9",
+        "color8": "#5da3a3",
+        "color9": "#952E2A",
+        "color10": "#B4295F",
+        "color11": "#581F9D",
+        "color12": "#A0219C",
+        "color13": "#E425A3",
+        "color14": "#CC27D5",
+        "color15": "#85e9e9"
+    }
+}

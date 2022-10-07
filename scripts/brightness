@@ -1,0 +1,4 @@
+#!/bin/bash
+# Set the brightness of screens
+ddcutil --bus=5 setvcp 10 "$1" &
+ddcutil --bus=6 setvcp 10 "$1" &
