@@ -157,7 +157,7 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.ThermalSensor(fontsize=23, format='{tag}: {temp:.0f}{unit}'),
+                widget.ThermalSensor(fontsize=23, format='{ta}: {temp:.0f}{unit}'),
                 widget.Spacer(),
                 widget.TextBox(text='Current layout: ', fontsize=23),
                 widget.CurrentLayout(fontsize=23),
