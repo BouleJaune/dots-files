@@ -87,7 +87,7 @@ keys = [
 groups = [Group("Main", spawn=["firefox", "kitty"]),
           Group("Social", spawn=["discord"]),
           Group("Musique", spawn=["spotify"]),
-          Group("Misc")]
+          Group("Misc", spawn=["steam"])]
 
 group_keys = ["l", "u", "y", "comma"]
 
@@ -120,17 +120,20 @@ border_color_focus = "#8207b3"
 border_color_normal = "#240130"
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4,
+    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"],
+                   border_width=4,
                    border_focus=border_color_focus,
-                   border_normal=border_color_normal,
-                   margin=5),
+                   border_normal=border_color_normal),  # margin=5),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.MonadTall(),
-    layout.MonadTall(),
+    layout.MonadTall(border_width=4,
+                     border_focus=border_color_focus,
+                     border_normal=border_color_normal,
+                     # margin=5,
+                     align=1),  # main window to the right
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
@@ -152,19 +155,21 @@ widget_defaults = dict(
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
+fontsize_4k = 23
+fontsize_1440 = 17
 
 screens = [
+
     Screen(
         bottom=bar.Bar(
             [
-                widget.ThermalSensor(fontsize=23, format='{ta}: {temp:.0f}{unit}'),
                 widget.Spacer(),
-                widget.TextBox(text='Current layout: ', fontsize=23),
-                widget.CurrentLayout(fontsize=23),
+                widget.TextBox(text='Current layout: ', fontsize=fontsize_4k),
+                widget.CurrentLayout(fontsize=fontsize_4k),
                 widget.Spacer(length=100),
-                widget.Prompt(fontsize=23),
-                widget.WindowName(fontsize=23),
-                widget.GroupBox(center_aligned=True, fontsize=23),
+                widget.Prompt(fontsize=fontsize_4k),
+                widget.WindowName(fontsize=fontsize_4k),
+                widget.GroupBox(center_aligned=True, fontsize=fontsize_4k),
                 widget.Spacer(),
                 widget.Chord(
                     chords_colors={
@@ -174,8 +179,7 @@ screens = [
                 ),
                 # widget.StatusNotifier(),
                 widget.Systray(),
-                widget.Clock(format="%Y-%m-%d %a %I:%M %p", fontsize=23),
-                widget.QuickExit(),
+                widget.Clock(format="%Y-%m-%d %a %I:%M %p", fontsize=fontsize_4k),
             ],
             40,
             background='#410257',
@@ -184,6 +188,34 @@ screens = [
             # Borders are magenta
         ),
     ),
+
+    Screen(
+        bottom=bar.Bar(
+            [
+                widget.Spacer(length=50),
+                widget.GroupBox(center_aligned=True, fontsize=fontsize_1440),
+                widget.Spacer(length=100),
+                widget.TextBox(text='Current layout: ', fontsize=fontsize_1440),
+                widget.CurrentLayout(fontsize=fontsize_1440),
+                widget.Spacer(length=100),
+                widget.Prompt(fontsize=fontsize_1440),
+                widget.WindowName(fontsize=fontsize_1440),
+                widget.Spacer(),
+                widget.Chord(
+                    chords_colors={
+                        "launch": ("#ff0000", "#ffffff"),
+                    },
+                    name_transform=lambda name: name.upper(),
+                ),
+                # widget.StatusNotifier(),
+            ],
+            26,
+            background='#410257',
+            # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
+            # border_color=["ff00ff", "000000", "ff00ff", "000000"]
+            # Borders are magenta
+        ),
+    )
 ]
 
 # Drag floating layouts.

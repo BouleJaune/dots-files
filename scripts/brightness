@@ -1,4 +1,16 @@
 #!/bin/bash
-# Set the brightness of screens
-ddcutil --bus=5 setvcp 10 "$1" &
-ddcutil --bus=6 setvcp 10 "$1" &
+# Set the brightness of screens and activate night mode
+if [ $1 -eq 0 ]
+then
+	ddcutil --bus=5 setvcp 10 "$1" &
+	ddcutil --bus=6 setvcp 10 "$1" &
+	redshift -P -O 3000
+elif [ $1 -eq 100 ]
+then
+	ddcutil --bus=5 setvcp 10 "$1" &
+	ddcutil --bus=6 setvcp 10 "$1" &
+	redshift -P -O 6500
+else
+	ddcutil --bus=5 setvcp 10 "$1" &
+	ddcutil --bus=6 setvcp 10 "$1" &
+fi
