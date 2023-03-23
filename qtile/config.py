@@ -86,8 +86,8 @@ keys = [
 # groups = [Group(i) for i in "jluy"]
 groups = [Group("Main", spawn=["firefox", "kitty"]),
           Group("Social", spawn=["discord"]),
-          Group("Musique", spawn=["spotify"]),
-          Group("Misc", spawn=["steam"])]
+          Group("Musique"),
+          Group("Misc")]
 
 group_keys = ["l", "u", "y", "comma"]
 

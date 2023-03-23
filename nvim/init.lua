@@ -71,7 +71,7 @@ vim.o.hlsearch = false
 vim.wo.number = true
 
 -- Enable mouse mode
-vim.o.mouse = 'a'
+vim.o.mouse = ''
 
 -- Enable break indent
 vim.o.breakindent = true
@@ -89,7 +89,8 @@ vim.wo.signcolumn = 'yes'
 
 -- Set colorscheme
 --vim.o.termguicolors = true
-vim.cmd [[colorscheme wpgtk]]
+--vim.cmd [[colorscheme wpgtk]]
+vim.cmd [[colorscheme koehler]]
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
