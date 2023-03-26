@@ -5,7 +5,7 @@ My Archlinux dots file
 
 Alacritty: improve padding + overall conf (theme)
 
-Qtile: improve dmenu and status bar style
+Qtile: improve dmenu and status bar style, add focused border on full screen window
 
 Add dots files that are not in .config
 
