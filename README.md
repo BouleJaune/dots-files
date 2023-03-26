@@ -1,28 +1,40 @@
 # dots-files
 My Archlinux dots file
 
-Scripts: 
+## TODO:
+
+Alacritty: improve padding + overall conf (theme)
+Qtile: improve dmenu and status bar style
+
+
+Why Qtile ? Cuz Python comfy
+
+Why Alacritty ? Out of all the terminals I tried it's the one with the least delay for redrawing screen after moving window
+
+## Scripts: 
 Folder is in the path. 
 
-brightness command helper:
+### brightness
 
 Takes a number ranging from 0 to 100 to set hardware luminosity through ddcutil and redshift.
 If the number is 0 then a low-blue light filter will be applied, if it's 100 it will be removed.
 
-tmux-sessionizer command :
+### tmux-sessionizer
 
-Used through the shortcut ctrl+t in zsh
-Opens up a fuzzyfinder menu to select a folder that will open OR attach a tmux session in that folder
+Used through the shortcut ctrl+t in zsh.
+Opens up a fuzzyfinder menu to select a folder that will open OR attach a tmux session in that folder.
+
 Credits to ThePrimeagen: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 
-Tmux:
+## Software infos and shortcuts
+### Tmux:
 
 Shortcuts:
 - leader + k : delete current session without prompt
 - leader + n or o : go to next or previous session
 - leader + s : list all sessions menu
 
-Qtile: 
+### Qtile: 
 
 Reload config from terminal if broken: qtile cmd-obj -o cmd -f reload_config
 
@@ -38,7 +50,7 @@ Shortcuts:
 - mod + return : open new terminal window
 - mod + w : kill window
 
-Alacritty:
+### Alacritty:
 
 Shorcuts:
 - ctrl + shift + space : enter alacritty vi-mode, allows previous stdout selection vi-style
@@ -46,6 +58,11 @@ Shorcuts:
 
 In vi mode, we need to select with v before yanking, and we need to paste with system wide paste.
 
+### Discord :
+
+Shortcuts : 
+- ctrl + t : open a sorta fzf menu to go to channels
+- esc : scroll to end of conv
 
 List of packages for the rice:
 
