@@ -2,20 +2,16 @@
 
 if [ -z "$2" ]
 then
-	echo "Default framerate"
 	fps="25"
 else
-	echo "Setting framerate"
 	fps=$2
 fi
 
 if [ $1 -eq 1 ]
 then
-	echo "Recording 4K screen"
-	ffmpeg -video_size 3840x2160 -framerate $fps -f x11grab -i :0.0+0,0 ~/Vidéos/screen.mp4
+	alacritty -e ffmpeg -video_size 3840x2160 -framerate $fps -f x11grab -i :0.0+0,0 ~/Vidéos/screen.mp4
 fi
 if [ $1 -eq 2 ]
 then
-	echo "Recording 1440p screen"
-	ffmpeg -video_size 2560x1440 -framerate $fps -f x11grab -i :0.0+3840,0 ~/Vidéos/screen.mp4
+	alacritty -e ffmpeg -video_size 2560x1440 -framerate $fps -f x11grab -i :0.0+3840,0 ~/Vidéos/screen.mp4
 fi
