@@ -17,6 +17,16 @@ Why Alacritty ? Out of all the terminals I tried it's the one with the least del
 ## Scripts: 
 Folder is in the path. 
 
+### record
+record screenNumber fps.
+Record screen at desired framerate, default to 25fps is no fps is specified. Output file is ~/Vidéos/screen.mp4.
+Screen number is 1 or 2.
+
+### sc
+
+Screen capture the selection. Gets saved in ~/Images/screen.png
+
+
 ### brightness
 
 Takes a number ranging from 0 to 100 to set hardware luminosity through ddcutil and redshift.
