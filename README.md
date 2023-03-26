@@ -4,7 +4,10 @@ My Archlinux dots file
 ## TODO:
 
 Alacritty: improve padding + overall conf (theme)
+
 Qtile: improve dmenu and status bar style
+
+Add dots files that are not in .config
 
 
 Why Qtile ? Cuz Python comfy
