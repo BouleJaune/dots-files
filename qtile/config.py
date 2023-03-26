@@ -46,9 +46,9 @@ keys = [
     Key([mod], "space", lazy.layout.next(), desc="Next window focus"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "n", lazy.layout.shuffle_left(),
+    Key([mod, "shift"], "n", lazy.layout.swap_column_left(),
         desc="Move window to the left"),
-    Key([mod, "shift"], "o", lazy.layout.shuffle_right(),
+    Key([mod, "shift"], "o", lazy.layout.swap_column_right(),
         desc="Move window to the right"),
     Key([mod, "shift"], "e", lazy.layout.shuffle_down(),
         desc="Move window down"),
@@ -62,7 +62,6 @@ keys = [
     Key([mod, "control"], "e", lazy.layout.grow_down(),
         desc="Grow window down"),
     Key([mod, "control"], "i", lazy.layout.grow_up(), desc="Grow window up"),
-    Key([mod], "h", lazy.layout.normalize(), desc="Reset all window sizes"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -102,7 +101,7 @@ keys = [
 ]
 
 # groups = [Group(i) for i in "jluy"]
-groups = [Group("Main", spawn=["firefox", "kitty"]),
+groups = [Group("Main", spawn=["firefox"]),
           Group("Social", spawn=["discord"]),
           Group("Musique"),
           Group("Misc")]
@@ -147,11 +146,11 @@ layouts = [
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
     # layout.Matrix(),
-    layout.MonadTall(border_width=4,
-                     border_focus=border_color_focus,
-                     border_normal=border_color_normal,
-                     # margin=5,
-                     align=1),  # main window to the right
+    # layout.MonadTall(border_width=4,
+    #                # border_focus=border_color_focus,
+    #                # border_normal=border_color_normal,
+    #                # margin=5,
+    #                # align=1),  # main window to the right
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
