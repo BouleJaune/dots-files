@@ -27,7 +27,7 @@
 import os
 import subprocess
 
-from libqtile import bar, layout, widget, hook
+from libqtile import bar, layout, widget, hook, extension
 from libqtile.config import Click, Drag, Group, Key, Match, Screen
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
@@ -79,7 +79,25 @@ keys = [
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawncmd(), desc="Spawn command with prompt widget"),
+    # Dmenu run config
+    Key([mod], 'v', lazy.run_extension(extension.DmenuRun(
+        dmenu_prompt=">",
+        dmenu_font="Andika-8",
+        background="#240130",
+        foreground="#00ff00",
+        selected_background="#079822",
+        selected_foreground="#fff",
+        dmenu_lines=10,
+    ))),
+    Key([mod], 'r', lazy.run_extension(extension.DmenuRun(
+        dmenu_prompt=">",
+        dmenu_font="Andika-8",
+        background="#240130",
+        foreground="#00ff00",
+        selected_background="#079822",
+        selected_foreground="#fff",
+        dmenu_lines=10,
+    ))),
     Key([mod], 'm', lazy.next_screen(), desc='Next monitor'),
 ]
 
