@@ -46,9 +46,13 @@ keys = [
     Key([mod], "space", lazy.layout.next(), desc="Next window focus"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
-    Key([mod, "shift"], "n", lazy.layout.swap_column_left(),
+    Key([mod, "mod1"], "o", lazy.layout.swap_column_right(),
+        desc="Move column to the right"),
+    Key([mod, "mod1"], "n", lazy.layout.swap_column_left(),
+        desc="Move column to the left"),
+    Key([mod, "shift"], "n", lazy.layout.shuffle_left(),
         desc="Move window to the left"),
-    Key([mod, "shift"], "o", lazy.layout.swap_column_right(),
+    Key([mod, "shift"], "o", lazy.layout.shuffle_right(),
         desc="Move window to the right"),
     Key([mod, "shift"], "e", lazy.layout.shuffle_down(),
         desc="Move window down"),
