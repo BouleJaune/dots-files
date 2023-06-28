@@ -17,6 +17,8 @@ Why Alacritty ? Out of all the terminals I tried it's the one with the least del
 modbprobe.d options :
 options kvm_intel nested=1
 options nct6683 force=1  (lm-sensors fanspeed)
+chmod u+w /sys/devices/platform/nct6683.2592/hwmon/hwmon2/pwm*
+
 
 
 ## Scripts: 
