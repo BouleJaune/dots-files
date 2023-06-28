@@ -14,6 +14,11 @@ Why Qtile ? Cuz Python comfy
 
 Why Alacritty ? Out of all the terminals I tried it's the one with the least delay for redrawing screen after moving window
 
+modbprobe.d options :
+options kvm_intel nested=1
+options nct6683 force=1  (lm-sensors fanspeed)
+
+
 ## Scripts: 
 Folder is in the path. 
 
@@ -92,4 +97,4 @@ System packages:
 - fzf
 
 Python packages:
-- grip
+- grip (md viewer)
