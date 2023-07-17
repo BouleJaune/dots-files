@@ -10,6 +10,7 @@ end
 -- stylua: ignore start
 require('packer').startup(function(use)
   use 'wbthomason/packer.nvim'                                                         -- Package manager
+  use { 'sindrets/diffview.nvim', requires = 'nvim-lua/plenary.nvim' }
   use 'tpope/vim-fugitive'                                                             -- Git commands in nvim
   use 'tpope/vim-rhubarb'                                                              -- Fugitive-companion to interact with github
   use { 'lewis6991/gitsigns.nvim', requires = { 'nvim-lua/plenary.nvim' } }            -- Add git related info in the signs columns and popups
@@ -28,6 +29,11 @@ require('packer').startup(function(use)
   -- Primeagen's vim trainer
   use 'ThePrimeagen/vim-be-good'
 
+  use 'simrat39/rust-tools.nvim'
+
+  -- Debugging
+  use 'mfussenegger/nvim-dap'
+  use {"shortcuts/no-neck-pain.nvim", tag = "*" }                                     -- center view
   -- Fuzzy Finder (files, lsp, etc)
   use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
 
@@ -305,13 +311,13 @@ local on_attach = function(_, bufnr)
 end
 
 -- nvim-cmp supports additional completion capabilities
-local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Setup mason so it can manage external tooling
 require('mason').setup()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pylsp','tsserver', 'sumneko_lua' }
+local servers = { 'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls' }
 
 -- Ensure the servers above are installed
 require('mason-lspconfig').setup {
@@ -332,7 +338,7 @@ local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, 'lua/?.lua')
 table.insert(runtime_path, 'lua/?/init.lua')
 
-require('lspconfig').sumneko_lua.setup {
+require('lspconfig').lua_ls.setup {
   on_attach = on_attach,
   capabilities = capabilities,
   settings = {
@@ -395,6 +401,21 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+
+local rt = require("rust-tools")
+
+rt.setup({
+  server = {
+    on_attach = function(_, bufnr)
+      rt.inlay_hints.enable()
+      -- Hover actions
+      vim.keymap.set("n", "<C-space>", rt.hover_actions.hover_actions, { buffer = bufnr })
+      -- Code action groups
+      vim.keymap.set("n", "<C-k>", rt.inlay_hints.enable(), { buffer = bufnr })
+    end,
+  },
+})
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

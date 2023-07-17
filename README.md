@@ -14,11 +14,14 @@ Why Qtile ? Cuz Python comfy
 
 Why Alacritty ? Out of all the terminals I tried it's the one with the least delay for redrawing screen after moving window
 
+nct6687 install DKMS : https://github.com/Fred78290/nct6687d
 modbprobe.d options :
 options kvm_intel nested=1
-options nct6683 force=1  (lm-sensors fanspeed)
-chmod u+w /sys/devices/platform/nct6683.2592/hwmon/hwmon2/pwm*
+blacklist nct6683
 
+module.load :
+i2c_dev
+nct6687
 
 
 ## Scripts: 
