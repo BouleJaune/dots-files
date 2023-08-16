@@ -1,5 +1,9 @@
 # dots-files
-My Archlinux dots file
+My Archlinux dots file 
+
+All custom system configurations should be explained here to ease the process of reinstalling the whole OS for my future me.
+
+Some things are specific to this specific hardware, like nvidia conf or sensors kernel module.
 
 ## TODO:
 
@@ -9,47 +13,81 @@ Qtile: improve dmenu and status bar style, add focused border on full screen win
 
 Add dots files that are not in .config
 
+### Reason for the choice of some softwares
 
-Why Qtile ? Cuz Python comfy
+Why Qtile ? \
+Cuz Python comfy
 
-Why Alacritty ? Out of all the terminals I tried it's the one with the least delay for redrawing screen after moving window
+Why Alacritty ?\
+Out of all the terminals I tried it's the only one with the least delay for redrawing screen after moving window, which is essential when you don't have any animations in your WM and it's tiling.
 
-nct6687 install DKMS
-git clone https://github.com/Fred78290/nct6687d && cd nct6687d && make dkms/install
-modbprobe.d options :
-options kvm_intel nested=1
+### Nvidia conf for suspend
+To load all video memory in ram when suspending so that we don't have to refresh windows after sleep to not have a black screen :
+
+```
+/etc/modprobe.d/nvidia-power-management.conf
+------------------------------------------------------------------
+options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/path/to/tmp-nvidia
+```
+
+Then regenerate initramfs (maybe optional) ``mkinitcpio -P``\
+Then ``systemctl enable nvidia-suspend.service && systemctl enable nvidia-hibernate.service``.\
+And finally a reboot is probably a good idea.
+
+### For fan control on b460 msi mag mortar : 
+
+``nct6687`` install DKMS version of this module.\
+``git clone https://github.com/Fred78290/nct6687d && cd nct6687d && make dkms/install``
+Remember to remove the folder after this.
+
+```
+/etc/modprobe.d/sensors.conf
+-------------------------
 blacklist nct6683
+```
 
+### To have nested virt with intel cpu for KVM :
+```
+/etc/modprobe.d/kvm.conf
+-----------------------
+options kvm_intel nested=1
+```
 
-module.load :
+### Some modules to load
+
+``/etc/modules-load.d/module.load`` :
+```
 i2c_dev
-nct6687
-btusb
+nct6687 #for the fan control again
+btusb #to get usb
+```
 
 ## Scripts: 
-Folder is in the path. 
+Folder is in the path, so all of them can be called as is. 
 
 ### record
-record screenNumber fps.
-Record screen at desired framerate, default to 25fps is no fps is specified. Output file is ~/Vidéos/screen.mp4.
+``record screenNumber fps``\
+Record screen at desired framerate, default to 25fps if no fps is specified. Output file is ``~/Vidéos/screen.mp4``\
 Screen number is 1 or 2.
 
 ### sc
 
-Screen capture the selection. Gets saved in ~/Images/screen.png
+Screen capture the selection.\
+Gets saved in ``~/Images/screen.png`` \
+Copy to system clipboard the image.
 
 
 ### brightness
 
-Takes a number ranging from 0 to 100 to set hardware luminosity through ddcutil and redshift.
+Takes a number ranging from 0 to 100 to set hardware luminosity through ddcutil and redshift.\
 If the number is 0 then a low-blue light filter will be applied, if it's 100 it will be removed.
 
 ### tmux-sessionizer
 
-Used through the shortcut ctrl+t in zsh.
+Used through the shortcut ctrl+t in zsh.\
 Opens up a fuzzyfinder menu to select a folder that will open OR attach a tmux session in that folder.
 
-Credits to ThePrimeagen: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
+Slightly modified version of ThePrimeagen script: https://github.com/ThePrimeagen/.dotfiles/blob/master/bin/.local/scripts/tmux-sessionizer
 
 ## Software infos and shortcuts
 ### Tmux:
@@ -102,6 +140,7 @@ System packages:
 - powerlevel10k
 - neovim
 - fzf
+- coolercontrol
 
 Python packages:
 - grip (md viewer)
