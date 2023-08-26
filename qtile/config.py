@@ -81,8 +81,8 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    # Dmenu run config
+    #Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    # rofi run config
     Key([mod], 'v', lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
         dmenu_font="Andika-8",
@@ -92,16 +92,18 @@ keys = [
         selected_foreground="#fff",
         dmenu_lines=10,
     ))),
-    Key([mod], 'r', lazy.run_extension(extension.DmenuRun(
-        dmenu_prompt=">",
-        dmenu_font="Andika-8",
-        background="#240130",
-        foreground="#00ff00",
-        selected_background="#079822",
-        selected_foreground="#fff",
-        dmenu_lines=10,
-    ))),
+    #Key([mod], 'r', lazy.run_extension(extension.DmenuRun(
+        #dmenu_prompt=">",
+        #dmenu_font="Andika-8",
+        #background="#240130",
+        #foreground="#00ff00",
+        #selected_background="#079822",
+        #selected_foreground="#fff",
+        #dmenu_lines=10,
+    #))),
     Key([mod], 'm', lazy.next_screen(), desc='Next monitor'),
+    Key([mod], 'r', lazy.spawn('rofi -show drun -dpi 200 -theme .config/rofi/launchers/type-7/style-2.rasi'), desc='rofi'),
+    Key([mod], 'f', lazy.spawn('sc'), desc='clipping tool'),
 ]
 
 # groups = [Group(i) for i in "jluy"]
@@ -142,7 +144,7 @@ border_color_normal = "#240130"
 
 layouts = [
     layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"],
-                   border_width=4,
+                   border_width=2,
                    border_focus=border_color_focus,
                    border_on_single=True,
                    border_normal=border_color_normal),  # margin=5),
@@ -159,7 +161,9 @@ layouts = [
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
-    # layout.TreeTab(),
+    layout.TreeTab(fontsize=33, 
+                   section_fontsize=33,
+                   panel_width=300),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
@@ -186,7 +190,7 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.Spacer(),
-                widget.TextBox(text='Current layout: ', fontsize=fontsize_4k),
+                widget.TextBox(text='Layout: ', fontsize=fontsize_4k),
                 widget.CurrentLayout(fontsize=fontsize_4k),
                 widget.Spacer(length=100),
                 widget.Prompt(fontsize=fontsize_4k),

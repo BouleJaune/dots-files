@@ -121,11 +121,27 @@ Shorcuts:
 
 In vi mode, we need to select with v before yanking, and we need to paste with system wide paste.
 
+
+### zsh :
+
+oh my zsh + p10k
+ctr + t open tmux-sessionizer
+ll=ls -l
+t=tmux a
+vim=nvim
+crkb="cd /home/xenio/Documents/qmk_firmware/keyboards/crkbd/keymaps/BouleJaune"
+conf="cd /home/xenio/.config/"
+
 ### Discord :
 
 Shortcuts : 
 - ctrl + t : open a sorta fzf menu to go to channels
 - esc : scroll to end of conv
+
+### Rofi :
+rofi + 
+git clone --depth=1 https://github.com/adi1090x/rofi.git
+Et suivre l'installation
 
 List of packages for the rice:
 
