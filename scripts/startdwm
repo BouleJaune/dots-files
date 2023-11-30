@@ -1,0 +1,8 @@
+#!/bin/sh
+while true; do
+    echo "starting dwm"
+    # Log stderror to a file
+    dwm
+    # No error logging
+    #dwm >/dev/null 2>&1
+done

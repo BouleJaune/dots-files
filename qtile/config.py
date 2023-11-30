@@ -34,6 +34,14 @@ from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
+#if qtile.core.name == "wayland":
+    #from libqtile.backend.wayland import InputConfig
+#
+    #wl_input_rules = {
+        #"1267:12377:ELAN1300:00 04F3:3059 Touchpad": InputConfig(left_handed=True),
+        #"*": InputConfig(left_handed=True, pointer_accel=True),
+        #"type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt"),
+    #}
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -44,6 +52,7 @@ keys = [
     Key([mod], "e", lazy.layout.down(), desc="Move focus down"),
     Key([mod], "i", lazy.layout.up(), desc="Move focus up"),
     Key([mod], "space", lazy.layout.next(), desc="Next window focus"),
+    Key([mod], "g", lazy.window.toggle_floating(), desc="Next window focus"),
     # Move windows between left/right columns or move up/down in current stack.
     # Moving out of range in Columns layout will create new column.
     Key([mod, "mod1"], "o", lazy.layout.swap_column_right(),
@@ -66,6 +75,7 @@ keys = [
     Key([mod, "control"], "e", lazy.layout.grow_down(),
         desc="Grow window down"),
     Key([mod, "control"], "i", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod], "b", lazy.hide_show_bar(), desc="Hides the bar"),
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -81,7 +91,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    #Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # rofi run config
     Key([mod], 'v', lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
@@ -103,7 +113,7 @@ keys = [
     #))),
     Key([mod], 'm', lazy.next_screen(), desc='Next monitor'),
     Key([mod], 'r', lazy.spawn('rofi -show drun -dpi 200 -theme .config/rofi/launchers/type-7/style-2.rasi'), desc='rofi'),
-    Key([mod], 'f', lazy.spawn('sc'), desc='clipping tool'),
+    Key([mod], 'f', lazy.spawn('flameshot gui'), desc='clipping tool'),
 ]
 
 # groups = [Group(i) for i in "jluy"]
@@ -181,7 +191,7 @@ widget_defaults = dict(
     padding=3,
 )
 extension_defaults = widget_defaults.copy()
-fontsize_4k = 23
+fontsize_4k = 20
 fontsize_1440 = 17
 
 screens = [
@@ -189,13 +199,13 @@ screens = [
     Screen(
         bottom=bar.Bar(
             [
-                widget.Spacer(),
-                widget.TextBox(text='Layout: ', fontsize=fontsize_4k),
+                widget.Spacer(length=1400),
+                #widget.TextBox(text='Layout: ', fontsize=fontsize_4k),
                 widget.CurrentLayout(fontsize=fontsize_4k),
                 widget.Spacer(length=100),
-                widget.Prompt(fontsize=fontsize_4k),
-                widget.WindowName(fontsize=fontsize_4k),
                 widget.GroupBox(center_aligned=True, fontsize=fontsize_4k),
+                widget.Spacer(length=100),
+                widget.WindowName(fontsize=fontsize_4k),
                 widget.Spacer(),
                 widget.Chord(
                     chords_colors={
@@ -207,12 +217,17 @@ screens = [
                 widget.Systray(),
                 widget.Clock(format="%Y-%m-%d %a %I:%M %p", fontsize=fontsize_4k),
             ],
-            40,
+            25,
             background='#410257',
             # border_width=[2, 0, 2, 0],  # Draw top and bottom borders
             # border_color=["ff00ff", "000000", "ff00ff", "000000"]
             # Borders are magenta
         ),
+
+        #Static Wallpaper 
+
+        wallpaper = '~/Images/wallpaper/neon-sunset-3840x2160_74456-mm-90.jpg',
+        wallpaper_mode = 'fill'
     ),
 
     Screen(
@@ -263,6 +278,7 @@ floating_layout = layout.Floating(
         # Run the utility of `xprop` to see the wm of an X client.
         *layout.Floating.default_float_rules,
         Match(wm_class="confirmreset"),  # gitk
+        Match(wm_class="dragon-term"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
         Match(wm_class="ssh-askpass"),  # ssh-askpass

@@ -422,5 +422,5 @@ rt.setup({
 --
 -- END of kickstart nvim config
 
-vim.o.rnu = true
+vim.o.nu = true
 vim.g.mapleader = "<Space>"

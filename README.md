@@ -27,7 +27,8 @@ To load all video memory in ram when suspending so that we don't have to refresh
 ```
 /etc/modprobe.d/nvidia-power-management.conf
 ------------------------------------------------------------------
-options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/path/to/tmp-nvidia
+options nvidia NVreg_PreserveVideoMemoryAllocations=1 NVreg_TemporaryFilePath=/var/tmp
+options nvidia-drm modeset=1
 ```
 
 Then regenerate initramfs (maybe optional) ``mkinitcpio -P``\
