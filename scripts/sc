@@ -1,3 +1,0 @@
-#!/bin/bash
-import ~/Images/screen.png
-xclip -selection clipboard -t image/png -i ~/Images/screen.png
