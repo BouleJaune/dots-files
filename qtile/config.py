@@ -91,7 +91,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    #Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # rofi run config
     Key([mod], 'v', lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
@@ -114,6 +114,7 @@ keys = [
     Key([mod], 'm', lazy.next_screen(), desc='Next monitor'),
     Key([mod], 'r', lazy.spawn('rofi -show drun -dpi 200 -theme .config/rofi/launchers/type-7/style-2.rasi'), desc='rofi'),
     Key([mod], 'f', lazy.spawn('flameshot gui'), desc='clipping tool'),
+    Key([mod], 'j', lazy.spawn('flameshot gui'), desc='clipping tool'),
 ]
 
 # groups = [Group(i) for i in "jluy"]
