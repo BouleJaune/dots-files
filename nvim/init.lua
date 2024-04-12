@@ -424,3 +424,4 @@ rt.setup({
 
 vim.o.nu = true
 vim.g.mapleader = "<Space>"
+vim.opt.clipboard = 'unnamedplus'

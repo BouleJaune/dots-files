@@ -158,6 +158,12 @@ System packages:
 - neovim
 - fzf
 - coolercontrol
+- zathura-pdf-mupdf
+- pavucontrol
+- btop
+- feh
+- nix
+- ranger
 
 Python packages:
 - grip (md viewer)
