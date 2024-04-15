@@ -169,6 +169,7 @@ Python packages:
 - grip (md viewer)
 
 Language servers to install system wide : 
-``'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls'``
+``'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls', 'nil'``
 
-Use : [https://wiki.archlinux.org/title/Language_Server_Protocol] to know which package needs to be installed.
+
+Use : [https://wiki.archlinux.org/title/Language_Server_Protocol] to know which package needs to be installed. Except for nil which is not on the link.
