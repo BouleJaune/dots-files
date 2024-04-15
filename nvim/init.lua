@@ -18,8 +18,8 @@ require('packer').startup(function(use)
   use 'nvim-treesitter/nvim-treesitter'                                                -- Highlight, edit, and navigate code
   use { 'nvim-treesitter/nvim-treesitter-textobjects', after = { 'nvim-treesitter' } } -- Additional textobjects for treesitter
   use 'neovim/nvim-lspconfig'                                                          -- Collection of configurations for built-in LSP client
-  use 'williamboman/mason.nvim'                                                        -- Manage external editor tooling i.e LSP servers
-  use 'williamboman/mason-lspconfig.nvim'                                              -- Automatically install language servers to stdpath
+  --use 'williamboman/mason.nvim'                                                        -- Manage external editor tooling i.e LSP servers
+  --use 'williamboman/mason-lspconfig.nvim'                                              -- Automatically install language servers to stdpath
   use { 'hrsh7th/nvim-cmp', requires = { 'hrsh7th/cmp-nvim-lsp' } }                    -- Autocompletion
   use { 'L3MON4D3/LuaSnip', requires = { 'saadparwaiz1/cmp_luasnip' } }                -- Snippet Engine and Snippet Expansion
   use 'nvim-lualine/lualine.nvim'                                                      -- Fancier statusline
@@ -315,15 +315,15 @@ end
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 
 -- Setup mason so it can manage external tooling
-require('mason').setup()
+--require('mason').setup()
 
 -- Enable the following language servers
 local servers = { 'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls' }
 
 -- Ensure the servers above are installed
-require('mason-lspconfig').setup {
-  ensure_installed = servers,
-}
+--require('mason-lspconfig').setup {
+--  ensure_installed = servers,
+--}
 
 for _, lsp in ipairs(servers) do
   require('lspconfig')[lsp].setup {
