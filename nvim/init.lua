@@ -40,6 +40,9 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
+-- vimtex 
+use 'lervag/vimtex'
+
   if is_bootstrap then
     require('packer').sync()
   end
@@ -318,7 +321,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 --require('mason').setup()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls', 'nil_ls' }
+local servers = { 'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls', 'nil_ls', 'texlab'}
 
 -- Ensure the servers above are installed
 --require('mason-lspconfig').setup {
@@ -425,4 +428,8 @@ rt.setup({
 
 vim.o.nu = true
 vim.g.mapleader = "<Space>"
+-- Global clipboard
 vim.opt.clipboard = 'unnamedplus'
+
+vim.g.vimtex_view_method = "zathura"
+vim.g.vimtex_quickfix_open_on_warning = 0

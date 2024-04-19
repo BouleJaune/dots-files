@@ -34,14 +34,6 @@ from libqtile.utils import guess_terminal
 
 mod = "mod4"
 terminal = guess_terminal()
-#if qtile.core.name == "wayland":
-    #from libqtile.backend.wayland import InputConfig
-#
-    #wl_input_rules = {
-        #"1267:12377:ELAN1300:00 04F3:3059 Touchpad": InputConfig(left_handed=True),
-        #"*": InputConfig(left_handed=True, pointer_accel=True),
-        #"type:keyboard": InputConfig(kb_options="ctrl:nocaps,compose:ralt"),
-    #}
 
 keys = [
     # A list of available commands that can be bound to keys can be found
@@ -76,6 +68,7 @@ keys = [
         desc="Grow window down"),
     Key([mod, "control"], "i", lazy.layout.grow_up(), desc="Grow window up"),
     Key([mod], "b", lazy.hide_show_bar(), desc="Hides the bar"),
+
     # Toggle between split and unsplit sides of stack.
     # Split = all windows displayed
     # Unsplit = 1 window displayed, like Max layout, but still with
@@ -122,7 +115,6 @@ groups = [Group("Main", spawn=["firefox"]),
           Group("Social", spawn=["discord"]),
           Group("Musique"),
           Group("Misc")]
-
 group_keys = ["l", "u", "y", "comma"]
 
 for i in range(len(groups)):
@@ -160,6 +152,7 @@ layouts = [
                    border_on_single=True,
                    border_normal=border_color_normal),  # margin=5),
     layout.Max(),
+    # layout.MonadThreeCol(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),
@@ -172,9 +165,10 @@ layouts = [
     # layout.MonadWide(),
     # layout.RatioTile(),
     # layout.Tile(),
-    layout.TreeTab(fontsize=33, 
-                   section_fontsize=33,
-                   panel_width=300),
+    # layout.TreeTab(fontsize=33,
+
+    #                   section_fontsize=33,
+    #                  panel_width=300),
     # layout.VerticalTile(),
     # layout.Zoomy(),
 ]
@@ -201,7 +195,7 @@ screens = [
         bottom=bar.Bar(
             [
                 widget.Spacer(length=1400),
-                #widget.TextBox(text='Layout: ', fontsize=fontsize_4k),
+                # widget.TextBox(text='Layout: ', fontsize=fontsize_4k),
                 widget.CurrentLayout(fontsize=fontsize_4k),
                 widget.Spacer(length=100),
                 widget.GroupBox(center_aligned=True, fontsize=fontsize_4k),
