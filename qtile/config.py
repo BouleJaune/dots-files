@@ -26,9 +26,11 @@
 
 import os
 import subprocess
+import time
+from subprocess import check_output
 
 from libqtile import bar, layout, widget, hook, extension
-from libqtile.config import Click, Drag, Group, Key, Match, Screen
+from libqtile.config import Click, Drag, Group, Key, Match, Screen, DropDown, ScratchPad
 from libqtile.lazy import lazy
 from libqtile.utils import guess_terminal
 
@@ -84,7 +86,7 @@ keys = [
     Key([mod], "Tab", lazy.next_layout(), desc="Toggle between layouts"),
     Key([mod], "w", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
-    #Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    # Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
     # rofi run config
     Key([mod], 'v', lazy.run_extension(extension.DmenuRun(
         dmenu_prompt=">",
@@ -95,29 +97,47 @@ keys = [
         selected_foreground="#fff",
         dmenu_lines=10,
     ))),
-    #Key([mod], 'r', lazy.run_extension(extension.DmenuRun(
-        #dmenu_prompt=">",
-        #dmenu_font="Andika-8",
-        #background="#240130",
-        #foreground="#00ff00",
-        #selected_background="#079822",
-        #selected_foreground="#fff",
-        #dmenu_lines=10,
-    #))),
     Key([mod], 'm', lazy.next_screen(), desc='Next monitor'),
     Key([mod], 'r', lazy.spawn('rofi -show drun -dpi 200 -theme .config/rofi/launchers/type-7/style-2.rasi'), desc='rofi'),
     Key([mod], 'f', lazy.spawn('flameshot gui'), desc='clipping tool'),
     Key([mod], 'j', lazy.spawn('flameshot gui'), desc='clipping tool'),
+    # topdown stuff
+    Key([mod], 'z', lazy.group['scratchpad'].dropdown_toggle('draw')),
+    Key([mod], 'x', lazy.group['scratchpad'].dropdown_toggle('term')),
 ]
 
-# groups = [Group(i) for i in "jluy"]
-groups = [Group("Main", spawn=["firefox"]),
-          Group("Social", spawn=["discord"]),
-          Group("Musique"),
-          Group("Misc")]
+
+def match_lorien_pid(c) -> None:
+    time.sleep(0.1)
+    try:
+        pid = int(check_output(["pidof", 'lorien']))
+        return c.get_pid() == pid
+    # exception who cares
+    except Exception:
+        return False
+
+
+groups = [
+    Group("Main", spawn=["firefox"]),
+    Group("Social", spawn=["discord"]),
+    Group("Musique"),
+    Group("Misc"),
+    ScratchPad("scratchpad", [
+        DropDown("draw", "lorien",
+                 warp_pointer=True, on_focus_lost_hide=True,
+                 match=Match(func=match_lorien_pid),
+                 width=0.55, height=0.55, x=0.225, y=0.225),
+        DropDown("term", "alacritty",
+                 width=0.35, height=0.40, x=0.33, y=0.33),
+    ]),
+]
+
 group_keys = ["l", "u", "y", "comma"]
 
 for i in range(len(groups)):
+    print(i)
+    if i == 4:
+        continue
     keys.extend(
         [
             # mod1 + letter of group = switch to group
@@ -127,15 +147,6 @@ for i in range(len(groups)):
                 lazy.group[groups[i].name].toscreen(),
                 desc="Switch to group {}".format(groups[i].name),
             ),
-            # mod1+shift+letter of group=switch & move focused window to group
-            # Key(
-            #    [mod, "shift"],
-            #    i.name,
-            #    lazy.window.togroup(i.name, switch_group=True),
-            #    desc="Switch&move focused window to group {}".format(i.name),
-            # ),
-            # Or, use below if you prefer not to switch to that group.
-            # mod1 + shift + letter of group = move focused window to group
             Key([mod, "shift"], group_keys[i],
                 lazy.window.togroup(groups[i].name),
                 desc="move focused window to group {}".format(groups[i].name)),
@@ -263,12 +274,15 @@ mouse = [
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
+
 dgroups_key_binder = None
 dgroups_app_rules = []  # type: list
 follow_mouse_focus = True
 bring_front_click = False
-cursor_warp = False
+cursor_warp = True
+
 floating_layout = layout.Floating(
+    border_width=0,
     float_rules=[
         # Run the utility of `xprop` to see the wm of an X client.
         *layout.Floating.default_float_rules,
@@ -276,6 +290,7 @@ floating_layout = layout.Floating(
         Match(wm_class="dragon-term"),  # gitk
         Match(wm_class="makebranch"),  # gitk
         Match(wm_class="maketag"),  # gitk
+        Match(wm_class="Lorien"),  # Lorien
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
