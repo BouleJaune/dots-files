@@ -426,8 +426,8 @@ rt.setup({
 --
 -- END of kickstart nvim config
 
+vim.keymap.set("n", "<leader>gp", function() vim.cmd [[Git! commit -a -m "update"]] vim.cmd [[Git! push]] end)
 vim.o.nu = true
-vim.g.mapleader = "<Space>"
 -- Global clipboard
 vim.opt.clipboard = 'unnamedplus'
 
