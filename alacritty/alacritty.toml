@@ -1,4 +1,6 @@
-import = ["/home/xenio/.config/alacritty/alacritty-colorscheme/themes/monokai_charcoal.toml"]
 
 [window]
-opacity = 0.8
+opacity = 1
+
+[general]
+import = ["/home/xenio/.config/alacritty/alacritty-colorscheme/themes/monokai_charcoal.toml"]

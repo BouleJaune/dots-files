@@ -40,8 +40,21 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable "make" == 1 }
 
--- vimtex 
-use 'lervag/vimtex'
+  -- vimtex 
+  use 'lervag/vimtex'
+
+  -- Workspaces
+  use 'natecraddock/workspaces.nvim'
+
+  -- Autosession !
+  use {
+  'rmagatti/auto-session',
+  config = function()
+    require("auto-session").setup {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    }
+  end
+}
 
   if is_bootstrap then
     require('packer').sync()
@@ -321,7 +334,7 @@ local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protoc
 --require('mason').setup()
 
 -- Enable the following language servers
-local servers = { 'clangd', 'rust_analyzer', 'pylsp','tsserver', 'lua_ls', 'nil_ls', 'texlab'}
+local servers = { 'clangd', 'rust_analyzer', 'pylsp','ts_ls', 'lua_ls', 'nil_ls', 'texlab'}
 
 -- Ensure the servers above are installed
 --require('mason-lspconfig').setup {
@@ -427,9 +440,13 @@ rt.setup({
 -- END of kickstart nvim config
 
 vim.keymap.set("n", "<leader>gp", function() vim.cmd [[Git! commit -a -m "update"]] vim.cmd [[Git! push]] end)
+vim.keymap.set("n", "<leader>o", function() vim.cmd [[cnext]] end)
+vim.keymap.set("n", "<leader>n", function() vim.cmd [[cprev]] end)
+vim.keymap.set("n", "<leader><backspace>", function() vim.cmd [[Telescope session-lens]] end)
 vim.o.nu = true
 -- Global clipboard
 vim.opt.clipboard = 'unnamedplus'
 
 vim.g.vimtex_view_method = "zathura"
 vim.g.vimtex_quickfix_open_on_warning = 0
+vim.o.sessionoptions="blank,buffers,curdir,folds,help,tabpages,winsize,winpos,terminal,localoptions"
