@@ -54,7 +54,15 @@ require('packer').startup(function(use)
       suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
     }
   end
-}
+  }
+
+  -- Oil file management 
+    use {
+      "stevearc/oil.nvim",
+      config = function()
+        require("oil").setup()
+      end,
+    }
 
   if is_bootstrap then
     require('packer').sync()

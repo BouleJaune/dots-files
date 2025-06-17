@@ -119,7 +119,7 @@ def match_lorien_pid(c) -> None:
 
 groups = [
     Group("Main", spawn=["firefox"]),
-    Group("Social", spawn=["discord"]),
+    Group("Social", spawn=["vesktop"]),
     Group("Musique"),
     Group("Misc"),
     ScratchPad("scratchpad", [
