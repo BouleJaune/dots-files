@@ -46,6 +46,11 @@ require('packer').startup(function(use)
   -- Workspaces
   use 'natecraddock/workspaces.nvim'
 
+  use {'rmagatti/auto-session',
+  config = function()
+    require("auto-session").setup {
+      suppressed_dirs = { "~/", "~/Projects", "~/Downloads", "/"},
+    }end}
   -- Oil file management 
     use {
       "stevearc/oil.nvim",
