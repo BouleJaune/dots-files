@@ -6,4 +6,4 @@ opacity = 1
 import = ["/home/xenio/.config/alacritty/alacritty-colorscheme/themes/monokai_charcoal.toml"]
 
 [font]
-size = 9
+size = 11

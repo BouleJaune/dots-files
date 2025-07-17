@@ -62,13 +62,17 @@ keys = [
     Key([mod, "shift"], "i", lazy.layout.shuffle_up(), desc="Move window up"),
     # Grow windows. If current window is on the edge of screen and direction
     # will be to screen edge - window would shrink.
-    Key([mod, "control"], "n", lazy.layout.grow_left(),
-        desc="Grow window to the left"),
-    Key([mod, "control"], "o", lazy.layout.grow_right(),
-        desc="Grow window to the right"),
-    Key([mod, "control"], "e", lazy.layout.grow_down(),
-        desc="Grow window down"),
-    Key([mod, "control"], "i", lazy.layout.grow_up(), desc="Grow window up"),
+    # Key([mod, "control"], "n", lazy.layout.grow_left(),
+    #     desc="Grow window to the left"),
+    # Key([mod, "control"], "o", lazy.layout.grow_right(),
+    #     desc="Grow window to the right"),
+    # Key([mod, "control"], "e", lazy.layout.grow_down(),
+    #     desc="Grow window down"),
+    # Key([mod, "control"], "i", lazy.layout.grow_up(), desc="Grow window up"),
+    Key([mod, "control"], "n", lazy.layout.grow_main(), desc="Grow main window"),
+    Key([mod, "control"], "i", lazy.layout.grow(), desc="Grow window"),
+    Key([mod, "control"], "e", lazy.layout.shrink(), desc="Shrink window"),
+    Key([mod, "control"], "o", lazy.layout.shrink_main(), desc="Srhink window"),
     Key([mod], "b", lazy.hide_show_bar(), desc="Hides the bar"),
 
     # Toggle between split and unsplit sides of stack.
@@ -157,13 +161,19 @@ border_color_focus = "#8207b3"
 border_color_normal = "#240130"
 
 layouts = [
-    layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"],
-                   border_width=2,
-                   border_focus=border_color_focus,
-                   border_on_single=True,
-                   border_normal=border_color_normal),  # margin=5),
+    layout.MonadThreeCol(
+        border_focus_stack=["#d75f5f", "#8f3d3d"],
+        border_width=2,
+        border_focus=border_color_focus,
+        border_on_single=True,
+        border_normal=border_color_normal),  # margin=5),
+    layout.Columns(
+        border_focus_stack=["#d75f5f", "#8f3d3d"],
+        border_width=2,
+        border_focus=border_color_focus,
+        border_on_single=True,
+        border_normal=border_color_normal),  # margin=5),
     layout.Max(),
-    # layout.MonadThreeCol(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
     # layout.Bsp(),

@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+if [[ $# -eq 1 ]]; then
+    selected=$1
+else
+    selected=$(cat ~/.config/ssh_hosts| fzf)
+fi
+
+
+if [[ -z $selected ]]; then
+    exit 0
+fi
+
+
+selected_name=$(echo $selected | cut -d "-" -f1 | tr . _)
+host=$(echo $selected | cut -d "-" -f2 )
+tmux_running=$(pgrep tmux)
+if [[ -z $TMUX ]] && [[ -z $tmux_running ]]; then
+    tmux new-session -s $selected_name "ssh $host"
+    exit 0
+fi
+
+if ! tmux has-session -t=$selected_name 2> /dev/null; then
+    echo $host
+    tmux new-session -ds $selected_name  "ssh $host"
+fi
+
+if [[ $TMUX ]] ;then
+    tmux switch-client -t $selected_name
+else
+    tmux attach-session -t $selected_name
+fi
